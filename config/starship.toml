@@ -1,0 +1,42 @@
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold #a3be8c)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[➜](bold #bf616a)"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[conda]
+ignore_base = false
+style = "bold #a3be8c"
+format = "via [$environment]($style) "
+
+[git_branch]
+style = "bold #b48ead"
+
+[python]
+style = "#ebcb8b bold"
+
+[java]
+style = "red bold"
+
+[cmd_duration]
+disabled = true
+
+[directory]
+format = " [$path]($style)[$read_only]($read_only_style) "
+style = "bold #88c0d0"
+
+[line_break]
+disabled = true
+
+[shell]
+fish_indicator = ""
+bash_indicator = "bash "
+style = "#88c0d0"
+format = "[$indicator]($style)"
+disabled = false
