@@ -19,8 +19,10 @@ require'lualine'.setup {
   options = {
     icons_enabled = true,
     theme = 'nord_new',
-    component_separators = { right = '|'},-- ⃒'},
+    component_separators = { right = '|'}, -- Experimental separator: ' ⃒'
+    -- default: component_separators = { left = '', right = ''}, 
     section_separators = { left = '', right = ''},
+    -- default: section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = false,
   },
@@ -43,19 +45,8 @@ require'lualine'.setup {
   tabline = {},
   extensions = {}
 }
---  sections = {
---    lualine_a = {
---      {'mode', separator = { left = '' }},
---    },
---    lualine_b = {},
---    lualine_c = {{'filename', file_status = true, path = 0}},
---    lualine_x = {'fileformat', 'filetype'},
---    lualine_y = {'%L'},
---    lualine_z = {'location'}
---  },
 
 require'nvim-web-devicons'.setup {
- -- your personnal icons can go here (to override)
  -- you can specify color or cterm_color instead of specifying both of them
  -- DevIcon will be appended to `name`
  override = {

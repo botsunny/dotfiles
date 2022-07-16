@@ -1,0 +1,58 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: ~/dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+dotfiles:
+  f_init.vim:
+    src: config/nvim/init.vim
+    dst: ~/.config/nvim/init.vim
+  f_nord_new.lua:
+    src: config/nvim/plugged/lualine.nvim/lua/lualine/themes/nord_new.lua
+    dst: ~/.config/nvim/plugged/lualine.nvim/lua/lualine/themes/nord_new.lua
+  f_starship.toml:
+    src: config/starship.toml
+    dst: ~/.config/starship.toml
+  f_config.conf:
+    src: config/neofetch/config.conf
+    dst: ~/.config/neofetch/config.conf
+  f_settings.json:
+    src: config/Code/User/settings.json
+    dst: ~/.config/Code/User/settings.json
+  f_my-layout.layout.latte:
+    src: config/latte/My Layout.layout.latte
+    dst: ~/.config/latte/My Layout.layout.latte
+  f_keybindings.json:
+    src: config/Code/User/keybindings.json
+    dst: ~/.config/Code/User/keybindings.json
+  f_profile:
+    src: config/fcitx5/profile
+    dst: ~/.config/fcitx5/profile
+    chmod: '600'
+  f_alacritty.yml:
+    src: config/alacritty.yml
+    dst: ~/.config/alacritty.yml
+  f_config.py:
+    src: config/qtile/config.py
+    dst: ~/.config/qtile/config.py
+  f_picom.conf:
+    src: config/picom.conf
+    dst: ~/.config/picom.conf
+profiles:
+  arch-sunny:
+    dotfiles:
+    - f_init.vim
+    - f_nord_new.lua
+    - f_starship.toml
+    - f_config.conf
+    - f_settings.json
+    - f_my-layout.layout.latte
+    - f_keybindings.json
+    - f_profile
+    - f_alacritty.yml
+    - f_config.py
+    - f_picom.conf
