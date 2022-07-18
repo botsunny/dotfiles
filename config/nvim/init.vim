@@ -5,6 +5,7 @@ set number
 set clipboard^=unnamed,unnamedplus
 set noshowmode
 set noshowcmd
+let g:nord_italic = v:false
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'shaunsingh/nord.nvim'
