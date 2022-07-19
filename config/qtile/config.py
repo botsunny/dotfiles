@@ -32,6 +32,32 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = "alacritty"
 
+nord = [
+        # Polar Night
+        "#2e3440", # 0
+        "#3b4252", # 1
+        "#434c5e", # 2
+        "#4c566a", # 3
+
+        # Snow Storm
+        "#d8dee9", # 4
+        "#e5e9f0", # 5
+        "#eceff4", # 6
+
+        # Frost
+        "#8fbcbb", # 7
+        "#88c0d0", # 8
+        "#81a1c1", # 9
+        "#5e81ac", # 10
+
+        # Aurora
+        "#bf616a", # 11
+        "#d08770", # 12
+        "#ebcb8b", # 13
+        "#a3be8c", # 14
+        "#b48ead", # 15
+       ]
+
 @lazy.function
 def grow_monad(qtile, direction):
     layout = qtile.current_layout
@@ -177,8 +203,11 @@ keys = [
         lazy.shutdown(),
         desc="Shutdown Qtile"),
     Key([mod], "Return",
-        lazy.spawn("rofi -show run"),
+        lazy.spawn("rofi -show drun"),
         desc="Bring up rofi"),
+    Key([mod, "shift"], "Return",
+        lazy.spawn("rofi -show p -modi p:rofi-powermenu"),
+        desc="Bring up rofi-powermenu"),
     Key([mod], "m",
         lazy.window.toggle_maximize(),
         desc="Toggle maximize"),
@@ -188,15 +217,15 @@ keys = [
 
     Key(
         [], "XF86AudioRaiseVolume",
-        lazy.spawn("amixer -c 0 -q set Master 2%+")
+        lazy.spawn("amixer set Master 10%+")
     ),
     Key(
         [], "XF86AudioLowerVolume",
-        lazy.spawn("amixer -c 0 -q set Master 2%-")
+        lazy.spawn("amixer set Master 10%-")
     ),
     Key(
         [], "XF86AudioMute",
-        lazy.spawn("amixer -c 0 -q set Master toggle")
+        lazy.spawn("amixer set Master toggle")
     ),
 ]
 
@@ -223,8 +252,8 @@ for i in groups:
 def init_layout_theme():
     return { "margin": 4,
              "border_width": 3,
-             "border_focus": "#88c0d0",
-             "border_normal": "#5e81ac"
+             "border_focus": nord[8],
+             "border_normal": nord[10]
            }
 
 layout_theme = init_layout_theme()
@@ -258,18 +287,65 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(highlight_method="block",
-                                this_current_screen_border="#81a1c1",
-                                inactive="#ffffff",
-                                padding_y = 1),
+                widget.GroupBox(
+                    highlight_method="block",
+                    this_current_screen_border=nord[9],
+                    inactive="#ffffff",
+                    padding_y = 1
+                ),
                 widget.Spacer(),
-                widget.WindowName(width=700),
+                widget.WindowName(
+                    width=700,
+                    max_chars=100
+                ),
                 widget.Spacer(),
-                widget.CurrentLayout(),
-                widget.Volume(step=10),
-                widget.Net(format='U {up} D {down}',
-                           interface='enp1s0'),
-                widget.Clock(format="%d/%m/%y %a %H:%M"),
+                widget.CurrentLayout(
+                    fmt="  {}",
+                    background=nord[11],
+                    foreground=nord[1],
+                    padding=6
+                ),
+                widget.CheckUpdates(
+                    distro="Arch_yay",
+                    update_interval=1800,
+                    display_format="  {updates}",
+                    no_update_string="  0",
+                    background=nord[12],
+                    foreground=nord[1],
+                    colour_have_updates=nord[1],
+                    colour_no_updates=nord[1],
+                    padding=6
+                ),
+                widget.Volume(
+                    fmt="墳  {}",
+                    step=10,
+                    background=nord[13],
+                    foreground=nord[1],
+                    padding=6
+                ),
+                widget.Net(
+                    format='{up}   {down}',
+                    interface='enp1s0',
+                    background=nord[14],
+                    foreground=nord[1],
+                    padding=6
+                ),
+                widget.Clock(
+                    fmt="  {}",
+                    format="%d/%m/%y %a %H:%M",
+                    background=nord[15],
+                    foreground=nord[1],
+                    padding=6
+                ),
+                widget.TextBox(
+                    text='',
+                    mouse_callbacks= {
+                        'Button1': lazy.spawn(
+                        "rofi -show p -modi p:rofi-powermenu")
+                    },
+                    background=nord[3],
+                    padding=10
+                )
             ],
             26,
             background="#00000000"
