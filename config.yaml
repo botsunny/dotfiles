@@ -36,6 +36,9 @@ dotfiles:
   f_picom.conf:
     src: config/picom.conf
     dst: ~/.config/picom.conf
+  d_rofi:
+    src: config/rofi
+    dst: ~/.config/rofi
 profiles:
   arch-sunny:
     dotfiles:
@@ -48,3 +51,4 @@ profiles:
     - f_alacritty.yml
     - f_config.py
     - f_picom.conf
+    - d_rofi
