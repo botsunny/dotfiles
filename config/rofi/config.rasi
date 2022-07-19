@@ -1,0 +1,240 @@
+configuration {
+  modi: "drun,filebrowser,window,run";
+  font: "FiraCode Nerd Font Mono 12";
+  show-icons: true;
+  icon-theme: "Zafiro-Dark-Icons";
+  width: 30;
+  line-margin: 10;
+  lines: 6;
+  columns: 2;
+ 
+  display-drun:        "";
+  display-filebrowser: ""; 
+  display-window:      "";
+  display-run:         "";
+
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+
+}
+
+@theme "~/.config/rofi/nord.rasi"
+
+* {
+   nord0: #2e3440;
+   nord1: #3b4252;
+   nord2: #434c5e;
+   nord3: #4c566a;
+   
+   nord4: #d8dee9;
+   nord5: #e5e9f0;
+   nord6: #eceff4;
+   
+   nord7: #8fbcbb;
+   nord8: #88c0d0;
+   nord9: #81a1c1;
+   nord10: #5e81ac;
+   
+   nord11: #bf616a;
+   nord12: #d08770;
+   nord13: #ebcb8b;
+   nord14: #a3be8c;
+   nord15: #b48ead;
+   
+   fg: @nord4;
+   fg-norm: @fg;
+   fg-norm-s: @nord3;
+   fg-norm-a: @fg;
+
+   fg-urg: @nord15;
+   fg-urg-s: @nord11;
+   fg-urg-a: @nord15;
+
+   fg-act: @nord5;
+   fg-act-s: @nord2;
+   fg-act-a: @nord5;
+
+   light-fg: @nord6;
+
+   bg: @nord0;
+   bg-norm: @bg;
+   bg-norm-s: @nord7;
+   bg-norm-a: @bg;
+
+   bg-urg: @nord10;
+   bg-urg-s: @nord14;
+   bg-urg-a: @nord10;
+
+   bg-act: @nord1;
+   bg-act-s: @nord8;
+   bg-act-a: @nord1;
+
+   light-bg: @nord3;
+
+   bg-color: transparent;
+
+   border-color: @nord9;
+   spacing: 2;
+   separator-color: @nord7;
+   
+   backlight: #ccffeedd;
+   highlight: underline bold #eceff4;
+   transparent: rgba(46,52,64,0);
+}
+
+window {
+    background-color: @bg;
+    border:           1;
+    padding:          5;
+}
+
+mainbox {
+    border:  0;
+    padding: 0;
+}
+
+message {
+    border:       2px 0px 0px ;
+    border-color: @separatorcolor;
+    padding:      1px ;
+}
+
+textbox {
+    text-color: @fg;
+}
+
+listview {
+    fixed-height: 0;
+    border:       2px 0px 0px ;
+    border-color: @separatorcolor;
+    spacing:      2px ;
+    scrollbar:    true;
+    padding:      2px 0px 0px ;
+}
+
+element {
+    border:  0;
+    padding: 1px ;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element.normal.normal {
+    background-color: @bg-norm;
+    text-color:       @fg-norm;
+}
+
+element.normal.urgent {
+    background-color: @bg-urg;
+    text-color:       @fg-urg;
+}
+
+element.normal.active {
+    background-color: @bg-a;
+    text-color:       @fg-a;
+}
+
+element.selected.normal {
+    background-color: @bg-norm-s;
+    text-color:       @fg-norm-s;
+}
+
+element.selected.urgent {
+    background-color: @bg-urg-s;
+    text-color:       @fg-urg-s;
+}
+
+element.selected.active {
+    background-color: @bg-act-s;
+    text-color:       @fg-act-s;
+}
+
+element.alternate.normal {
+    background-color: @bg-norm-a;
+    text-color:       @fg-norm-a;
+}
+
+element.alternate.urgent {
+    background-color: @bg-urg-a;
+    text-color:       @fg-urg-a;
+}
+
+element.alternate.active {
+    background-color: @bg-act-a;
+    text-color:       @fg-act-a;
+}
+
+element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-color: @fg-norm;
+    handle-width: 8px ;
+    padding:      0;
+}
+
+mode-switcher {
+    border:       2px 0px 0px ;
+    border-color: @separator-color;
+}
+
+button {
+    spacing:    0;
+    text-color: @fg-norm;
+}
+
+button.selected {
+    background-color: @bg-norm-s;
+    text-color:       @fg-norm-s;
+}
+
+inputbar {
+    spacing:          0;
+    text-color:       @fg-norm;
+    padding:          11px;
+    background-color: @bg-norm;
+}
+
+case-indicator {
+    spacing:    0;
+    text-color: @fg-norm;
+}
+
+entry {
+    spacing:          0;
+    text-color:       @nord4;
+    background-color: @nord3;
+}
+
+prompt {
+    spacing:          0;
+    text-color:       @nord4;
+    background-color: @bg-norm;
+}
+
+inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+
+textbox-prompt-colon {
+    expand:           false;
+    str:              "  ";
+    margin:           0px 0.3em 0em 0em ;
+    text-color:       @fg-norm;
+    background-color: @bg-norm;
+}
+
