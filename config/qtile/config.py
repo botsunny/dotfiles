@@ -28,6 +28,7 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from pipe_volume import Volume
 
 mod = "mod4"
 terminal = "alacritty"
@@ -218,14 +219,17 @@ keys = [
     Key(
         [], "XF86AudioRaiseVolume",
         lazy.spawn("amixer set Master 10%+")
+        #lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +10%")
     ),
     Key(
         [], "XF86AudioLowerVolume",
         lazy.spawn("amixer set Master 10%-")
+        #lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -10%")
     ),
     Key(
         [], "XF86AudioMute",
         lazy.spawn("amixer set Master toggle")
+        #lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
     ),
 ]
 
@@ -306,7 +310,7 @@ screens = [
                     padding=6
                 ),
                 widget.CheckUpdates(
-                    distro="Arch_yay",
+                    distro="Arch_checkupdates",
                     update_interval=1800,
                     display_format="  {updates}",
                     no_update_string="  0",
@@ -318,11 +322,23 @@ screens = [
                 ),
                 widget.Volume(
                     fmt="墳  {}",
-                    step=10,
                     background=nord[13],
                     foreground=nord[1],
                     padding=6
                 ),
+               # Widget to control volume with pactl (goes over 100)
+               # Volume(
+               #         fmt = " {}",
+               #         background=nord[13],
+               #         foreground=nord[1],
+               #         padding=6,
+               #         get_volume_command = "pactl get-sink-volume @DEFAULT_SINK@",
+               #         check_mute_command = "pactl get-sink-mute @DEFAULT_SINK@",
+               #         check_mute_string = "yes",
+               #         volume_up_command = "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+               #         volume_down_command = "pactl set-sink-volume @DEFAULT_SINK@ -2%",
+               #         mute_command = "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+               #  ),
                 widget.Net(
                     format='{up}   {down}',
                     interface='enp1s0',

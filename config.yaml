@@ -39,6 +39,9 @@ dotfiles:
   d_rofi:
     src: config/rofi
     dst: ~/.config/rofi
+  d_lvim:
+    src: config/lvim
+    dst: ~/.config/lvim
 profiles:
   arch-sunny:
     dotfiles:
@@ -52,3 +55,4 @@ profiles:
     - f_config.py
     - f_picom.conf
     - d_rofi
+    - d_lvim

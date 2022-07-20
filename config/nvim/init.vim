@@ -4,7 +4,6 @@ set termguicolors
 set number
 set clipboard^=unnamed,unnamedplus
 set noshowmode
-set noshowcmd
 let g:nord_italic = v:false
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
