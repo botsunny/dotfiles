@@ -30,9 +30,6 @@ dotfiles:
   f_alacritty.yml:
     src: config/alacritty.yml
     dst: ~/.config/alacritty.yml
-  f_config.py:
-    src: config/qtile/config.py
-    dst: ~/.config/qtile/config.py
   f_picom.conf:
     src: config/picom.conf
     dst: ~/.config/picom.conf
@@ -42,6 +39,9 @@ dotfiles:
   d_lvim:
     src: config/lvim
     dst: ~/.config/lvim
+  d_qtile:
+    src: config/qtile
+    dst: ~/.config/qtile
 profiles:
   arch-sunny:
     dotfiles:
@@ -52,7 +52,7 @@ profiles:
     - f_my-layout.layout.latte
     - f_profile
     - f_alacritty.yml
-    - f_config.py
     - f_picom.conf
     - d_rofi
     - d_lvim
+    - d_qtile

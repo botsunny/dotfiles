@@ -2,7 +2,7 @@ configuration {
   modi: "drun,filebrowser,window,run";
   font: "FiraCode Nerd Font Mono 12";
   show-icons: true;
-  icon-theme: "Zafiro-Dark-Icons";
+  icon-theme: "Zafiro-Icons-Dark";
   width: 30;
   line-margin: 10;
   lines: 6;
