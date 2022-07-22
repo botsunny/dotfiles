@@ -30,6 +30,8 @@ configuration {
 
 @theme "~/.config/rofi/nord.rasi"
 
+// nord.rasi is from https://github.com/undiabler/nord-rofi-theme
+// these are my own modifications to nord.rasi
 * {
    nord0: #2e3440;
    nord1: #3b4252;
@@ -235,7 +237,7 @@ inputbar {
 
 textbox-prompt-colon {
     expand:           false;
-    str:              "  ";
+    str:              " ";
     margin:           0px 0.3em 0em 0em ;
     text-color:       @fg-norm;
     background-color: @bg-norm;
