@@ -7,7 +7,9 @@ Managed with [Dotdrop](https://github.com/deadc0de6/dotdrop). You can ignore `co
 
 ### Screenshot (Qtile)
 
-*to be added*
+![qtile-1](./Pictures/screenshots/screenshot_qtile1.png)
+
+![qtile-2](./Pictures/screenshots/screenshot_qtile2.png)
 
 ### Notes
 
