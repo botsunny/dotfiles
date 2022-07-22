@@ -1,5 +1,5 @@
 configuration {
-  modi: "drun,filebrowser,window,run";
+  modi: "combi,drun,filebrowser,window,run";
   font: "FiraCode Nerd Font Mono 12";
   show-icons: true;
   icon-theme: "Zafiro-Icons-Dark";
@@ -8,10 +8,13 @@ configuration {
   lines: 6;
   columns: 2;
  
+  display-combi:       "";
   display-drun:        "";
   display-filebrowser: ""; 
   display-window:      "";
   display-run:         "";
+
+  combi-modi: "filebrowser,drun";
 
   timeout {
       action: "kb-cancel";
@@ -115,7 +118,7 @@ listview {
     border:       2px 0px 0px ;
     border-color: @separatorcolor;
     spacing:      2px ;
-    scrollbar:    true;
+    scrollbar:    false;
     padding:      2px 0px 0px ;
 }
 

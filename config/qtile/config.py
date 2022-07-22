@@ -151,6 +151,9 @@ keys = [
     Key([mod], "s",
         lazy.layout.toggle_split(),
         desc="Toggle vertical split on the current stack"),
+    Key([mod], "f",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on focused window"),
     
     # Grow windows
     Key([mod, "control"], "Left",
@@ -210,7 +213,7 @@ keys = [
         lazy.shutdown(),
         desc="Shutdown Qtile"),
     Key([mod], "Return",
-        lazy.spawn("rofi -show drun"),
+        lazy.spawn("rofi -show combi"),
         desc="Bring up rofi"),
     Key([mod, "shift"], "Return",
         lazy.spawn("rofi -show p -modi p:rofi-powermenu"),
@@ -234,11 +237,11 @@ groups = [Group(i) for i in "12345"]
 
 for i in groups:
     keys.extend(
-        [   # mod1 + letter of group = switch to group
-            Key([mod], i.name,
+        [   # switch to group
+            Key([mod, "control"], i.name,
                 lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
 
-            # mod1 + shift + letter of group = switch to & move focused window to group
+            # switch to & move focused window to group
             Key([mod, "shift"], i.name,
                 lazy.window.togroup(i.name, switch_group=True),
                 desc="Switch to & move focused window to group {}".format(i.name)),
@@ -266,59 +269,56 @@ layouts = [
     layout.Stack(num_stacks=1, **layout_theme),
     layout.Max(**layout_theme),
     layout.TreeTab(
-        font="Kanit",
-        fontsize=10,
-        sections=["1", "2", "3"],
-        section_fontsize=10,
+        font             = "Kanit",
+        fontsize         = 10,
+        sections         = ["A", "B", "C"],
+        section_fontsize = 10,
 
-        border_width=2,
-        padding_left=6,
-        padding_right=6,
-        padding_x=5,
-        padding_y=3,
-        section_top=10,
-        section_bottom=20,
-        level_shift=8,
-        vspace=3,
-        panel_width=200,
+        border_width  = 2,
+        padding_left  = 6,
+        padding_right = 6,
+        padding_x     = 5,
+        padding_y     = 3,
+        level_shift   = 8,
+        vspace        = 3,
+        panel_width   = 200,
 
-        active_bg=nord[7],
-        active_fg=nord[1],
-        bg_color=nord[1],
-        inactive_bg=nord[0],
-        inactive_fg=nord[5],
-        section_fg=nord[1],
-        urgent_bg=nord[15],
-        urgent_fg=nord[1],
+        active_bg   = nord[7],
+        active_fg   = nord[1],
+        bg_color    = nord[1],
+        inactive_bg = nord[0],
+        inactive_fg = nord[5],
+        section_fg  = nord[1],
+        urgent_bg   = nord[15],
+        urgent_fg   = nord[1],
         ),
     layout.Floating(**layout_theme)
-    # layout.Columns(**layout_theme),
     # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadWide(),
+    # layout.Matrix()
+    # layout.Columns(**layout_theme),
     # layout.Tile(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 
-layout_index = [1, 2, 3, 4, 5, 6, 7]
+layout_index = [i for i in range(1, len(layouts)+1)]
 
 for i in layout_index:
     keys.extend(
-        [Key([mod, "control"], str(i),
+        [Key([mod], str(i),
              lazy.to_layout_index(i-1),
              desc="Switch to layout of index i-1")
         ]
     )
 
 @hook.subscribe.layout_change
-def update_layout_index(layout, group):
+def update_layout_num(layout, group):
     for item in layouts:
         if item.name == layout.name:
             name = layout.name
             idx = layouts.index(item) + 1
             break
-    qtile.widgets_map["textbox"].update(str(idx))
+    qtile.widgets_map["layoutnum"].update(str(idx))
 
 widget_defaults = dict(
     font="Kanit",
@@ -332,97 +332,97 @@ screens = [
         top=bar.Bar(
             [
              widget.GroupBox(
-                  highlight_method="block",
-                  this_current_screen_border=nord[9],
-                  block_highlight_text_color=nord[0],
-                  inactive=nord[6],
-                  padding_y = 1
+                  highlight_method           = "block",
+                  this_current_screen_border = nord[7],
+                  block_highlight_text_color = nord[0],
+                  inactive                   = nord[6],
+                  padding_y                  = 1
               ),
               widget.WindowName(
-                  width=700,
-                  max_chars=150,
-                  foreground=nord[4]
+                  width      = 700,
+                  max_chars  = 150,
+                  foreground = nord[4]
               ),
               widget.Spacer(),
               widget.TextBox(
-                  text="1",
-                  background=nord[11],
-                  foreground=nord[1],
-                  padding=6,
+                  name       = "layoutnum",
+                  text       = "1",
+                  background = nord[11],
+                  foreground = nord[1],
+                  padding    = 6,
               ),
               widget.CurrentLayout(
-                  fmt="  {}",
-                  background=nord[11],
-                  foreground=nord[1],
-                  padding=6,
-                  mouse_callbacks={
+                  fmt             = "  {}",
+                  background      = nord[11],
+                  foreground      = nord[1],
+                  padding         = 6,
+                  mouse_callbacks = {
                       'Button1': lazy.next_layout(),
                       'Button3': lazy.prev_layout()
                   }
               ),
               widget.CheckUpdates(
-                  distro="Arch_checkupdates",
-                  update_interval=1800,
-                  display_format="  {updates}",
-                  no_update_string="  0",
-                  background=nord[12],
-                  foreground=nord[1],
-                  colour_have_updates=nord[1],
-                  colour_no_updates=nord[1],
-                  padding=6,
-                  mouse_callbacks={
+                  distro              = "Arch_checkupdates",
+                  update_interval     = 1800,
+                  display_format      = "  {updates}",
+                  no_update_string    = "  0",
+                  background          = nord[12],
+                  foreground          = nord[1],
+                  colour_have_updates = nord[1],
+                  colour_no_updates   = nord[1],
+                  padding             = 6,
+                  mouse_callbacks     = {
                       'Button1': lambda: qtile.cmd_spawn(terminal + ' -e yay')
                   }
               ),
               widget.Volume(
-                  fmt="墳  {}",
-                  background=nord[13],
-                  foreground=nord[1],
-                  padding=6,
-                  mouse_callbacks={
+                  fmt             = "墳  {}",
+                  background      = nord[13],
+                  foreground      = nord[1],
+                  padding         = 6,
+                  mouse_callbacks = {
                       'Button3': lazy.spawn("sh rofi-audiodevices")
                   }
               ),
               # Widget to control volume with pactl (goes over 100)
               # Volume(
-              #         fmt = " {}",
-              #         background=nord[13],
-              #         foreground=nord[1],
-              #         padding=6,
-              #         get_volume_command = "pactl get-sink-volume @DEFAULT_SINK@",
-              #         check_mute_command = "pactl get-sink-mute @DEFAULT_SINK@",
-              #         check_mute_string = "yes",
-              #         volume_up_command = "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+              #         fmt                 = " {}",
+              #         background          = nord[13],
+              #         foreground          = nord[1],
+              #         padding             = 6,
+              #         get_volume_command  = "pactl get-sink-volume @DEFAULT_SINK@",
+              #         check_mute_command  = "pactl get-sink-mute @DEFAULT_SINK@",
+              #         check_mute_string   = "yes",
+              #         volume_up_command   = "pactl set-sink-volume @DEFAULT_SINK@ +2%",
               #         volume_down_command = "pactl set-sink-volume @DEFAULT_SINK@ -2%",
-              #         mute_command = "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+              #         mute_command        = "pactl set-sink-mute @DEFAULT_SINK@ toggle",
               #  ),
               widget.Net(
-                  format='{up}   {down}',
-                  interface='enp1s0',
-                  background=nord[14],
-                  foreground=nord[1],
-                  padding=6
+                  format     = '{up}   {down}',
+                  interface  = 'enp1s0',
+                  background = nord[14],
+                  foreground = nord[1],
+                  padding    = 6
               ),
               widget.Clock(
-                  fmt="{}",
-                  #format="%d/%m/%y %a %H:%M",
-                  format="%a, %b %d  |  %H:%M",
-                  background=nord[15],
-                  foreground=nord[1],
-                  padding=6
+                  fmt        = "{}",
+                  format     = "%a, %b %d  |  %H:%M",
+                  background = nord[15],
+                  foreground = nord[1],
+                  padding    = 6
               ),
               widget.TextBox(
-                  text='',
-                  mouse_callbacks= {
+                  text            = '',
+                  background      = nord[3],
+                  padding         = 10,
+                  mouse_callbacks = {
                       'Button1': lazy.spawn("rofi -show p -modi p:rofi-powermenu")
-                  },
-                  background=nord[3],
-                  padding=10
+                  }
               )
             ],
-            26,
-            background="#00000000",
-            margin=[4,4,0,4]
+            size       = 26,
+            background = nord[3],
+            margin     = [4,4,0,4]
         )
     )
 ]
@@ -453,9 +453,9 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],
-    border_width=2,
-    border_focus=nord[14],
-    border_normal=nord[4]
+    border_width  = 2,
+    border_focus  = nord[14],
+    border_normal = nord[4]
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
