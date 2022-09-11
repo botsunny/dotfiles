@@ -48,6 +48,9 @@ dotfiles:
   d_screenshots:
     src: Pictures/screenshots
     dst: ~/Pictures/screenshots
+  d_fontconfig:
+    src: config/fontconfig
+    dst: ~/.config/fontconfig
 profiles:
   arch-sunny:
     dotfiles:
@@ -64,3 +67,4 @@ profiles:
     - d_qtile
     - d_wallpapers
     - d_screenshots
+    - d_fontconfig

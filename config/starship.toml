@@ -27,6 +27,7 @@ disabled = true
 [directory]
 format = " [$path]($style)[$read_only]($read_only_style) "
 style = "bold #88c0d0"
+truncation_length = 5
 
 [line_break]
 disabled = true
