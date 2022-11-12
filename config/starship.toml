@@ -10,7 +10,7 @@ disabled = true
 [conda]
 ignore_base = false
 style = "bold #a3be8c"
-format = "via [$environment]($style) "
+format = "via [$symbol $environment]($style) "
 
 [git_branch]
 style = "bold #b48ead"
